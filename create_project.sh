@@ -34,6 +34,15 @@ add_executable(runTests \${TESTSRCS} \${SOURCES})
 target_link_libraries(runTests \${GTEST_LIBRARIES} pthread)
 EOF
 
+# add runTests.cpp
+cat << EOF > "${dir}/test/runTests.cpp"
+#include <gtest/gtest.h>
+int main(int argc, char **argv) {
+	testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
+}
+EOF
+
 # add project CMakeLists file
 cat <<EOF > "${dir}/CMakeLists.txt"
 cmake_minimum_required(VERSION 2.6)
