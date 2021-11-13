@@ -39,6 +39,7 @@ done
 project_name=$(basename "${dir}")
 
 mkdir -p "${dir}"
+mkdir -p "${dir}/include"
 mkdir -p "${dir}/src"
 mkdir -p "${dir}/test"
 
@@ -55,7 +56,8 @@ find_package(GTest REQUIRED)
 # Set source files and headers
 ${CUDA_INCL_PATH}
 set(SRCPATH ../src)
-include_directories(\${GTEST_INCLUDE_DIRS} \${SRCPATH})
+set(INCLPATH ../include)
+include_directories(\${GTEST_INCLUDE_DIRS} \${INCLPATH})
 file(GLOB SOURCES \${SRCPATH}/*.cpp${CUDA_SRC})
 file(GLOB TESTSRCS ./*.cpp)
 
@@ -82,7 +84,8 @@ set (CMAKE_CXX_STANDARD 20)
 # Set source files and headers
 ${CUDA_INCL_PATH}
 set(SRCPATH ./src)
-include_directories(\${SRCPATH})
+set(INCLPATH ./include)
+include_directories(\${INCLPATH})
 file(GLOB SOURCES \${SRCPATH}/*.cpp${CUDA_SRC})
 
 add_executable(${project_name} main.cpp \${SOURCES})
